@@ -23,6 +23,15 @@ class Sorter {
 
   sort(indices) {
     var new_array = [];
+    for (var i = 0; i < indices.length; i++) {
+      for (var j = 0; j < indices.length - i; j++) {
+        if (indices[j] > indices[j + 1]) {
+          var temp = indices[j];
+          indices[j] = indices[j + 1];
+          indices[j + 1] = temp;
+        }
+      }
+    }
     for (var i = 0; i < indices.length; i++){
       new_array.push(this.array[indices[i]]);
     }
