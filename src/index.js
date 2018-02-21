@@ -46,7 +46,17 @@ class Sorter {
         }
       }
     } else {
-      new_array = step(new_array, this.f);
+      for (var j = 0; j < new_array.length - 1; j++) {
+        for (var i = 0; i < new_array.length - 1; i++) {
+          if (this.f(new_array[i], new_array[i + 1]) > 0) {
+            var x = new_array[i];
+            new_array[i] = new_array[i + 1];
+            new_array[i + 1] = x;
+          } else {
+            continue;
+          }
+        }
+      }
     }
     for (var i = 0; i < indices.length; i++) {
       this.array[indices[i]] = new_array[i];
@@ -55,32 +65,9 @@ class Sorter {
   }
 
   setComparator(compareFunction) {
-    this.setCom == true;
+    this.setCom = true;
     this.f = compareFunction;
   }
 }
 
-function step(par, f) {
-  for (var i = 0; i < par.length; i++)
-    if (f(par[i], par[i + 1]) > 0) {
-      var x = par[i];
-      par[i] = par[i + 1];
-      par[i + 1] = x;
-    } else {
-      continue;
-    }
-  return par;
-}
-
 module.exports = Sorter;
-
-var sorter = new Sorter;
-sorter.add(6);
-sorter.add(5);
-sorter.sort([0, 1]);
-
-sorter.add(2);
-sorter.add(1);
-sorter.sort([1, 0]);
-
-sorter.toArray();
